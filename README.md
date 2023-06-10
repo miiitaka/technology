@@ -11,3 +11,7 @@ HTMLタグに関する技術詰め込み
 ## CSS
 
 CSSのプロパティに関する技術寄せ集め
+
+- display
+  - grid
+- margin-inline
