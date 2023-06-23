@@ -6,6 +6,7 @@
 
 HTMLタグに関する技術詰め込み
 
+- dialog
 - popover
 
 ## CSS
