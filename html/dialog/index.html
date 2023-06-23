@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dialog Tag</title>
+  <style>
+    button {
+      cursor: pointer;
+    }
+    .button {
+      display: block;
+    }
+    .dialog-content {
+      border: 0;
+      border-radius: 3%;
+      box-shadow: 3px 3px 15px rgba(0, 0, 0, .3);
+      padding: 2%;
+    }
+    .dialog-content::backdrop {
+      background-color: #000;
+      opacity: .8;
+    }
+  </style>
+</head>
+<body>
+  <dialog id="dialog" class="dialog-content">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/XpPXHEvCRAI?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <div class="button"><button id="close">CLOSE</button></div>
+  </dialog>
+  <button id="open">OPEN</button>
+
+  <script>
+    let
+      open = document.getElementById('open'),
+      close = document.getElementById('close'),
+      dialog = document.getElementById('dialog');
+    
+    const triggerEvent = new Event('click')
+
+    const videoStop = () => {
+      let playerWindow = document.querySelector('iframe').contentWindow;
+
+      playerWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
+    };
+
+    open.addEventListener('click', () => {
+      dialog.showModal();
+    });
+
+    close.addEventListener('click', () => {
+      close.dispatchEvent(triggerEvent);
+    });
+    
+    dialog.addEventListener('click', (e) => {
+      videoStop();
+      dialog.close();
+    });
+  </script>
+</body>
+</html>
