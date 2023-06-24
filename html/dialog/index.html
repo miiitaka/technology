@@ -39,7 +39,7 @@
     
     const triggerEvent = new Event('click')
 
-    const videoStop = () => {
+    const stopVideo = () => {
       let playerWindow = document.querySelector('iframe').contentWindow;
 
       playerWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
@@ -54,7 +54,7 @@
     });
     
     dialog.addEventListener('click', (e) => {
-      videoStop();
+      stopVideo();
       dialog.close();
     });
   </script>
