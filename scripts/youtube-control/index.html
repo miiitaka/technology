@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IFrame Player API</title>
+</head>
+<body>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/XpPXHEvCRAI?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <button id="play">play</button>
+  <button id="pause">pause</button>
+  <button id="stop">stop</button>
+
+  <script>
+    let
+      youtube = document.querySelector('iframe').contentWindow,
+      play = document.getElementById('play'),
+      pause = document.getElementById('pause'),
+      stop = document.getElementById('stop');
+
+    const controlVideo = (func) => {
+      let message = '{"event": "command", "func": "' + func + '", "args": ""}';
+      youtube.postMessage(message, '*');
+    };
+
+    play.addEventListener('click', () => {
+      controlVideo('playVideo');
+    });
+    pause.addEventListener('click', () => {
+      controlVideo('pauseVideo');
+    });
+    stop.addEventListener('click', () => {
+      controlVideo('stopVideo');
+    });
+  </script>
+</body>
+</html>
