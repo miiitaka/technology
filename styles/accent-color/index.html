@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>accent-color</title>
+  <style>
+    .ac {
+      accent-color: #f00;
+    }
+  </style>
+</head>
+<body>
+  <fieldset>
+    <legend>Radio</legend>
+    <label><input type="radio">Normal</label>
+    <label><input type="radio" class="ac">Accent Color</label>
+  </fieldset>
+
+  <fieldset>
+    <legend>CheckBox</legend>
+    <label><input type="checkbox">Normal</label>
+    <label><input type="checkbox" class="ac">Accent Color</label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Range</legend>
+    <input type="range">Normal
+    <input type="range" class="ac">Accent Color
+  </fieldset>
+
+  <fieldset>
+    <legend>Progress</legend>
+    <label>Normal: <progress></label>
+    <label>Accent Color: <progress class="ac"></label>
+  </fieldset>
+</body>
+</html>
