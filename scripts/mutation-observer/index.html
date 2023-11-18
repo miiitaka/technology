@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MutationObserver</title>
+</head>
+<body>
+  <section>
+    <h1>年月を監視して値が変わったら「値」を自動更新する。</h1>
+    <p>値：<input type="text" id="box"></p>
+    <div>
+      <input type="month" id="month">
+      <a href="" id="prev">前月</a>
+      <a href="" id="next">次月</a>
+      <a href="" id="observe">監視をやめる</a>
+    </div>
+  </section>
+
+  <script>
+    const
+      elmBox = document.getElementById('box'),
+      elmMonth = document.getElementById('month'),
+      elmPrev = document.getElementById('prev'),
+      elmNext = document.getElementById('next'),
+      elmObserve = document.getElementById('observe'),
+      today = new Date();
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.target === elmMonth) {
+          elmBox.setAttribute('value', mutation.target.value);
+        }
+      });
+    });
+    const config = {
+      attributes: true,
+      attributeFilter: ['value']
+    };
+    observer.observe(elmMonth, config);
+
+    const formatMonth = () => {
+      let strDate = '';
+      strDate = strDate.concat(today.getFullYear(), '-');
+      strDate = strDate.concat((today.getMonth() + 1).toString().padStart(2, '0'));
+      return strDate;
+    };
+
+    elmPrev.addEventListener('click', (e) => {
+      e.preventDefault();
+      today.setMonth(today.getMonth() - 1);
+      elmMonth.setAttribute('value', formatMonth());
+    });
+
+    elmNext.addEventListener('click', (e) => {
+      e.preventDefault();
+      today.setMonth(today.getMonth() + 1);
+      elmMonth.setAttribute('value', formatMonth());
+      // 動作しないパターン
+      // elmMonth.value = formatMonth();
+    });
+
+    elmObserve.addEventListener('click', (e) => {
+      e.preventDefault();
+      observer.disconnect();
+    });
+
+    elmMonth.addEventListener('change', (e) => {
+      e.preventDefault();
+      e.target.setAttribute('value', e.target.value);
+    })
+
+    elmMonth.setAttribute('value', formatMonth());
+  </script>
+</body>
+</html>
